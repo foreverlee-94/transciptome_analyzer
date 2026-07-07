@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T16:00:24",
+  "generated_at": "2026-07-07T16:14:04",
   "collections": [
     {
       "id": "czi_lung",
@@ -15560,6 +15560,20 @@
           "n_samples": 96,
           "n_sublibraries": 72,
           "pct_pass_filter_full": 0.9668899664685429,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "17.76 GB"
         },
@@ -16109,6 +16123,20 @@
           "n_samples": 96,
           "n_sublibraries": 126,
           "pct_pass_filter_full": 0.953194047410318,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "27.04 GB"
         },
@@ -16637,6 +16665,20 @@
           "n_samples": 96,
           "n_sublibraries": 105,
           "pct_pass_filter_full": 0.883724281155999,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "12.27 GB"
         },
@@ -17176,6 +17218,20 @@
           "n_samples": 96,
           "n_sublibraries": 112,
           "pct_pass_filter_full": 0.953675684102864,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "21.69 GB"
         },
@@ -17747,6 +17803,20 @@
           "n_samples": 96,
           "n_sublibraries": 144,
           "pct_pass_filter_full": 0.9203945542159215,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "18.41 GB"
         },
@@ -18328,6 +18398,20 @@
           "n_samples": 96,
           "n_sublibraries": 154,
           "pct_pass_filter_full": 0.9656032495590355,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "26.95 GB"
         },
@@ -18883,6 +18967,20 @@
           "n_samples": 96,
           "n_sublibraries": 130,
           "pct_pass_filter_full": 0.9184224428275104,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "15.38 GB"
         },
@@ -19467,6 +19565,20 @@
           "n_samples": 96,
           "n_sublibraries": 158,
           "pct_pass_filter_full": 0.95894461635367,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "28.30 GB"
         },
@@ -20004,6 +20116,20 @@
           "n_samples": 96,
           "n_sublibraries": 111,
           "pct_pass_filter_full": 0.9493670087744851,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "17.50 GB"
         },
@@ -20573,6 +20699,20 @@
           "n_samples": 96,
           "n_sublibraries": 142,
           "pct_pass_filter_full": 0.9611030977607202,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "24.71 GB"
         },
@@ -21110,6 +21250,20 @@
           "n_samples": 96,
           "n_sublibraries": 110,
           "pct_pass_filter_full": 0.9498311495267063,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "21.64 GB"
         },
@@ -21693,6 +21847,20 @@
           "n_samples": 96,
           "n_sublibraries": 156,
           "pct_pass_filter_full": 0.9715395844611124,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "34.92 GB"
         },
@@ -22233,6 +22401,20 @@
           "n_samples": 96,
           "n_sublibraries": 165,
           "pct_pass_filter_full": 0.9535198898850084,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "26.14 GB"
         },
@@ -22761,8 +22943,374 @@
           "n_samples": 96,
           "n_sublibraries": 101,
           "pct_pass_filter_full": 0.951259632515525,
+          "obs_cell_tissue_origin": [
+            "brain",
+            "breast",
+            "cervix uteri",
+            "colon",
+            "endometrium",
+            "kidney",
+            "liver",
+            "lung",
+            "pancreas",
+            "skin",
+            "stomach",
+            "urinary bladder"
+          ],
           "encoding_version": "0.1.0",
           "file_size_human": "20.89 GB"
+        }
+      ],
+      "cell_lines": [
+        {
+          "cellosaurus_id": "CVCL_0023",
+          "cell_name": "A549",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0028",
+          "cell_name": "AN3 CA",
+          "tissue_origin": "endometrium",
+          "disease": "endometrial adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0069",
+          "cell_name": "SK-MEL-2",
+          "tissue_origin": "skin",
+          "disease": "melanoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0099",
+          "cell_name": "SNU-1",
+          "tissue_origin": "stomach",
+          "disease": "gastric adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0131",
+          "cell_name": "A-172",
+          "tissue_origin": "brain",
+          "disease": "glioblastoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0152",
+          "cell_name": "AsPC-1",
+          "tissue_origin": "pancreas",
+          "disease": "pancreatic ductal adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0179",
+          "cell_name": "BT-474",
+          "tissue_origin": "breast",
+          "disease": "invasive breast carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0218",
+          "cell_name": "COLO 205",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0292",
+          "cell_name": "HCT15",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0293",
+          "cell_name": "HEC-1-A",
+          "tissue_origin": "endometrium",
+          "disease": "endometrial adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0320",
+          "cell_name": "HT-29",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0332",
+          "cell_name": "HS-578T",
+          "tissue_origin": "breast",
+          "disease": "invasive breast carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0334",
+          "cell_name": "Hs 766T",
+          "tissue_origin": "pancreas",
+          "disease": "pancreatic adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0359",
+          "cell_name": "J82",
+          "tissue_origin": "urinary bladder",
+          "disease": "bladder carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0366",
+          "cell_name": "SNU-423",
+          "tissue_origin": "liver",
+          "disease": "adult hepatocellular carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0371",
+          "cell_name": "KATO III",
+          "tissue_origin": "stomach",
+          "disease": "gastric signet ring cell adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0397",
+          "cell_name": "LS 180",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0399",
+          "cell_name": "LoVo",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0428",
+          "cell_name": "MIA PaCa-2",
+          "tissue_origin": "pancreas",
+          "disease": "pancreatic undifferentiated carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0459",
+          "cell_name": "NCI-H460",
+          "tissue_origin": "lung",
+          "disease": "lung large cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0480",
+          "cell_name": "PANC-1",
+          "tissue_origin": "pancreas",
+          "disease": "pancreatic ductal adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0504",
+          "cell_name": "RKO",
+          "tissue_origin": "colon",
+          "disease": "colon carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_0546",
+          "cell_name": "SW480",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1055",
+          "cell_name": "A-427",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1056",
+          "cell_name": "A498",
+          "tissue_origin": "kidney",
+          "disease": "renal cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1094",
+          "cell_name": "C-33 A",
+          "tissue_origin": "cervix uteri",
+          "disease": "cervical squamous cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1097",
+          "cell_name": "C32",
+          "tissue_origin": "skin",
+          "disease": "amelanotic melanoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1098",
+          "cell_name": "HepG2/C3A",
+          "tissue_origin": "liver",
+          "disease": "hepatoblastoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1119",
+          "cell_name": "CFPAC-1",
+          "tissue_origin": "pancreas",
+          "disease": "pancreatic ductal adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1125",
+          "cell_name": "CHP-212",
+          "tissue_origin": "brain",
+          "disease": "neuroblastoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1239",
+          "cell_name": "H4",
+          "tissue_origin": "brain",
+          "disease": "astrocytoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1285",
+          "cell_name": "HOP62",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1381",
+          "cell_name": "LOX-IMVI",
+          "tissue_origin": "skin",
+          "disease": "amelanotic melanoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1478",
+          "cell_name": "NCI-H1573",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1495",
+          "cell_name": "NCI-H1792",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1517",
+          "cell_name": "NCI-H2030",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1531",
+          "cell_name": "NCI-H2122",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1547",
+          "cell_name": "NCI-H23",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1550",
+          "cell_name": "NCI-H2347",
+          "tissue_origin": "lung",
+          "disease": "lung adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1571",
+          "cell_name": "NCI-H596",
+          "tissue_origin": "lung",
+          "disease": "lung adenosquamous carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1577",
+          "cell_name": "NCI-H661",
+          "tissue_origin": "lung",
+          "disease": "lung large cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1635",
+          "cell_name": "Panc 03.27",
+          "tissue_origin": "pancreas",
+          "disease": "pancreatic adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1666",
+          "cell_name": "RPMI-7951",
+          "tissue_origin": "skin",
+          "disease": "melanoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1693",
+          "cell_name": "SHP-77",
+          "tissue_origin": "lung",
+          "disease": "lung small cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1715",
+          "cell_name": "SW 1088",
+          "tissue_origin": "brain",
+          "disease": "astrocytoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1716",
+          "cell_name": "SW 1271",
+          "tissue_origin": "lung",
+          "disease": "lung small cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1717",
+          "cell_name": "SW1417",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1724",
+          "cell_name": "SW48",
+          "tissue_origin": "colon",
+          "disease": "colon adenocarcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_1731",
+          "cell_name": "SW 900",
+          "tissue_origin": "lung",
+          "disease": "lung squamous cell carcinoma",
+          "n_plates": 14
+        },
+        {
+          "cellosaurus_id": "CVCL_C466",
+          "cell_name": "hTERT-HPNE",
+          "tissue_origin": "pancreas",
+          "disease": "normal (hTERT-immortalized)",
+          "n_plates": 14
         }
       ]
     }

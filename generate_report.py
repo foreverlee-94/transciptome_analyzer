@@ -20,7 +20,7 @@ def get_collection(payload: dict, collection_id: str) -> dict:
     for c in payload["collections"]:
         if c["id"] == collection_id:
             return c
-    return {"id": collection_id, "name": collection_id, "source_dir": "", "n_datasets": 0, "datasets": []}
+    return {"id": collection_id, "name": collection_id, "source_dir": "", "n_datasets": 0, "datasets": [], "cell_lines": []}
 
 
 def build_html(payload: dict) -> str:
@@ -44,13 +44,21 @@ def build_html(payload: dict) -> str:
     tahoe_total_cells = sum(d.get("n_cells") or 0 for d in tahoe_datasets)
     tahoe_total_size = sum(d.get("file_size_bytes") or 0 for d in tahoe_datasets)
     drug_set = sorted({dr for d in tahoe_datasets for dr in (d.get("obs_drug") or [])})
-    cell_name_set = sorted({c for d in tahoe_datasets for c in (d.get("obs_cell_name") or [])})
+
+    # Tahoe-100M은 plate(파일)마다 세포주 패널 50종이 전부 풀링되어 있어, plate 단위로
+    # "세포주" 필터를 걸어도 모든 plate가 그대로 걸린다(의미 없음). 대신 세포주 단위
+    # 참조 테이블(cell_lines, Cellosaurus 기반 조직 기원 포함)을 따로 만들어 거기서
+    # "조직 기원 = lung" 같은 필터가 실제로 동작하게 한다.
+    cell_lines = tahoe.get("cell_lines", [])
+    tissue_origin_set = sorted({c["tissue_origin"] for c in cell_lines if c.get("tissue_origin")})
+    n_lung_cell_lines = sum(1 for c in cell_lines if c.get("tissue_origin") == "lung")
 
     def options(values: list[str]) -> str:
         return "".join(f'<option value="{v}">{v}</option>' for v in values)
 
     czi_json = json.dumps(czi_datasets, ensure_ascii=False)
     tahoe_json = json.dumps(tahoe_datasets, ensure_ascii=False)
+    cell_lines_json = json.dumps(cell_lines, ensure_ascii=False)
 
     czi_total_size_gb = czi_total_size / (1024 ** 3)
     tahoe_total_size_gb = tahoe_total_size / (1024 ** 3)
@@ -185,6 +193,7 @@ def build_html(payload: dict) -> str:
   }}
   .tag.disease {{ background: #3a2430; color: #ff9db3; }}
   .tag.drug {{ background: #2a3a26; color: #a8e06a; }}
+  .tag.lung {{ background: #1f3a2e; color: #6fe0a8; font-weight: 700; }}
   .num {{ text-align: right; font-variant-numeric: tabular-nums; }}
   .title-cell {{ max-width: 340px; }}
   .title-main {{ font-weight: 600; }}
@@ -232,6 +241,8 @@ def build_html(payload: dict) -> str:
   .kv-grid .v a {{ color: var(--accent); }}
   .status-error {{ color: var(--warn); font-weight: 600; }}
   footer {{ padding: 20px 28px 50px; color: var(--text-dim); font-size: 12px; }}
+  .section-title {{ margin: 8px 28px 0; font-size: 16px; }}
+  .section-sub {{ margin: 4px 28px 14px; color: var(--text-dim); font-size: 12px; max-width: 900px; }}
 </style>
 </head>
 <body>
@@ -281,12 +292,12 @@ def build_html(payload: dict) -> str:
     <div class="stat-card"><div class="value">{tahoe_total_cells:,}</div><div class="label">총 세포 수 (n_cells 합)</div></div>
     <div class="stat-card"><div class="value">{tahoe_total_size_gb:,.1f} GB</div><div class="label">총 파일 크기</div></div>
     <div class="stat-card"><div class="value">{len(drug_set)}</div><div class="label">고유 약물 종류</div></div>
-    <div class="stat-card"><div class="value">{len(cell_name_set)}</div><div class="label">고유 세포주 종류</div></div>
+    <div class="stat-card"><div class="value">{len(cell_lines)}</div><div class="label">고유 세포주 종류</div></div>
+    <div class="stat-card"><div class="value">{n_lung_cell_lines}</div><div class="label">폐(lung) 유래 세포주</div></div>
   </div>
   <div class="toolbar">
-    <input type="text" id="tahoe-search" placeholder="파일명 / 약물 / 세포주 등 검색...">
+    <input type="text" id="tahoe-search" placeholder="파일명 / 약물 등 검색...">
     <select id="tahoe-drugFilter"><option value="">전체 약물</option>{options(drug_set)}</select>
-    <select id="tahoe-cellLineFilter"><option value="">전체 세포주</option>{options(cell_name_set)}</select>
     <span class="count" id="tahoe-count"></span>
   </div>
   <table id="tahoe-table"><thead><tr></tr></thead><tbody></tbody></table>
@@ -298,12 +309,32 @@ def build_html(payload: dict) -> str:
       <div class="kv-grid" id="tahoe-modalBody"></div>
     </div>
   </div>
-  <footer>원본 경로: {tahoe['source_dir']} &middot; obs 메타데이터만 읽어 생성 (발현행렬 X 및 세포별 BARCODE는 로드하지 않음)</footer>
+
+  <h2 class="section-title">세포주 참조 (조직 기원별)</h2>
+  <div class="section-sub">Tahoe-100M은 plate마다 50개 세포주가 동일하게 풀링되어 있어, plate 단위 필터로는 특정 조직 유래 세포주만 골라낼 수 없습니다. 아래 표에서 조직 기원(Cellosaurus 기준)으로 직접 필터링하세요.</div>
+  <div class="toolbar">
+    <input type="text" id="cellline-search" placeholder="세포주명 / Cellosaurus ID / 질환 검색...">
+    <select id="cellline-tissueFilter"><option value="">전체 조직 기원</option>{options(tissue_origin_set)}</select>
+    <span class="count" id="cellline-count"></span>
+  </div>
+  <table id="cellline-table"><thead><tr></tr></thead><tbody></tbody></table>
+  <div class="modal-backdrop" id="cellline-modalBackdrop">
+    <div class="modal">
+      <button class="close-btn" id="cellline-closeModalBtn">닫기</button>
+      <h2 id="cellline-modalTitle"></h2>
+      <div class="modal-sub" id="cellline-modalSub"></div>
+      <div class="kv-grid" id="cellline-modalBody"></div>
+    </div>
+  </div>
+
+  <footer>원본 경로: {tahoe['source_dir']} &middot; obs 메타데이터만 읽어 생성 (발현행렬 X 및 세포별 BARCODE는 로드하지 않음). 세포주 조직 기원은 Cellosaurus(cellosaurus.org)의 공식 derived-from-site/disease 값을 기준으로 정리했습니다.</footer>
 </div>
 
 <script>
 const CZI_DATA = {czi_json};
 const TAHOE_DATA = {tahoe_json};
+const CELLLINE_DATA = {cell_lines_json};
+const LUNG_CELL_NAMES = new Set(CELLLINE_DATA.filter(c => c.tissue_origin === 'lung').map(c => c.cell_name));
 
 function fmtNum(n) {{
   return (n === null || n === undefined) ? '-' : n.toLocaleString('en-US');
@@ -321,6 +352,11 @@ function fmtSize(bytes) {{
 function tagList(arr, cls) {{
   if (!arr || arr.length === 0) return '<span style="color:var(--text-dim)">-</span>';
   return arr.map(v => `<span class="tag ${{cls||''}}">${{v}}</span>`).join('');
+}}
+// cell_name 태그 목록에서 폐(lung) 유래 세포주만 강조색으로 표시한다.
+function tagListHighlightLung(arr) {{
+  if (!arr || arr.length === 0) return '<span style="color:var(--text-dim)">-</span>';
+  return arr.map(v => `<span class="tag ${{LUNG_CELL_NAMES.has(v) ? 'lung' : ''}}">${{v}}</span>`).join('');
 }}
 function kv(label, value) {{
   return `<div class="k">${{label}}</div><div class="v">${{value}}</div>`;
@@ -486,11 +522,9 @@ buildPanel({{
   defaultSortKey: 'plate_num',
   filters: [
     {{ selectId: 'tahoe-drugFilter', match: (d, v) => (d.obs_drug || []).includes(v) }},
-    {{ selectId: 'tahoe-cellLineFilter', match: (d, v) => (d.obs_cell_name || []).includes(v) }},
   ],
   searchMatch: (d, q) => [
-    d.filename, `plate ${{d.plate_num}}`,
-    ...(d.obs_drug || []), ...(d.obs_cell_name || []), ...(d.obs_cell_line || [])
+    d.filename, `plate ${{d.plate_num}}`, ...(d.obs_drug || [])
   ].join(' ').toLowerCase().includes(q),
   columns: [
     {{ key: 'plate_num', label: 'Plate', numeric: true, render: (d, badge) => `Plate ${{d.plate_num}}${{badge}}` }},
@@ -514,13 +548,50 @@ buildPanel({{
     {{ label: '약물 수', render: d => fmtNum(d.n_drugs) }},
     {{ label: '약물 목록', render: d => tagList(d.obs_drug, 'drug') }},
     {{ label: '세포주 수', render: d => fmtNum(d.n_cell_lines) }},
-    {{ label: '세포주 목록 (common name)', render: d => tagList(d.obs_cell_name) }},
+    {{ label: '세포주 목록 (common name)', render: d => tagListHighlightLung(d.obs_cell_name) }},
     {{ label: '세포주 목록 (Cellosaurus ID)', render: d => tagList(d.obs_cell_line) }},
     {{ label: '샘플(well) 수', render: d => fmtNum(d.n_samples) }},
     {{ label: 'Sublibrary 수', render: d => fmtNum(d.n_sublibraries) }},
     {{ label: '세포주기 phase', render: d => tagList(d.obs_phase) }},
     {{ label: 'Pass filter 등급', render: d => tagList(d.obs_pass_filter) }},
     {{ label: '파일 크기', render: d => fmtSize(d.file_size_bytes) }},
+  ],
+}});
+
+// --- 세포주 참조(조직 기원별) 패널 설정 ---
+buildPanel({{
+  data: CELLLINE_DATA,
+  tableId: 'cellline-table',
+  searchId: 'cellline-search',
+  countId: 'cellline-count',
+  modalTitleId: 'cellline-modalTitle',
+  modalSubId: 'cellline-modalSub',
+  modalBodyId: 'cellline-modalBody',
+  modalBackdropId: 'cellline-modalBackdrop',
+  closeBtnId: 'cellline-closeModalBtn',
+  defaultSortKey: 'tissue_origin',
+  filters: [
+    {{ selectId: 'cellline-tissueFilter', match: (d, v) => d.tissue_origin === v }},
+  ],
+  searchMatch: (d, q) => [
+    d.cell_name, d.cellosaurus_id, d.tissue_origin, d.disease
+  ].join(' ').toLowerCase().includes(q),
+  columns: [
+    {{ key: 'cell_name', label: '세포주명', render: d =>
+      `<span class="tag ${{d.tissue_origin === 'lung' ? 'lung' : ''}}">${{d.cell_name}}</span>` }},
+    {{ key: 'cellosaurus_id', label: 'Cellosaurus ID', render: d =>
+      `<a href="https://www.cellosaurus.org/${{d.cellosaurus_id}}" target="_blank" rel="noopener">${{d.cellosaurus_id}}</a>` }},
+    {{ key: 'tissue_origin', label: '조직 기원', render: d => d.tissue_origin || '-' }},
+    {{ key: 'disease', label: '질환', render: d => d.disease || '-' }},
+    {{ key: 'n_plates', label: '등장 Plate 수', numeric: true, render: d => fmtNum(d.n_plates) }},
+  ],
+  modalTitle: d => d.cell_name,
+  modalFields: [
+    {{ label: 'Cellosaurus ID', render: d =>
+      `<a href="https://www.cellosaurus.org/${{d.cellosaurus_id}}" target="_blank" rel="noopener">${{d.cellosaurus_id}}</a>` }},
+    {{ label: '조직 기원', render: d => d.tissue_origin || '-' }},
+    {{ label: '질환', render: d => d.disease || '-' }},
+    {{ label: '등장 Plate 수', render: d => fmtNum(d.n_plates) + ' / ' + TAHOE_DATA.length }},
   ],
 }});
 

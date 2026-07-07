@@ -70,6 +70,64 @@ TAHOE_CATEGORICAL_OBS_COLUMNS = [
 
 TAHOE_FILENAME_RE = re.compile(r"plate(?P<plate_num>\d+)", re.IGNORECASE)
 
+# Tahoe-100M 스크린에 쓰인 50개 세포주의 조직 기원(tissue of origin)과 질환.
+# Cellosaurus(https://www.cellosaurus.org) API로 각 Cellosaurus accession(CVCL_xxxx)을
+# 조회해 얻은 공식 "derived-from-site"/"disease" 값을 기준으로 정리했다 (전이 부위가
+# 아니라 암이 실제로 발생한 조직 기준: 예) NCI-H460은 흉수(pleural effusion)에서 채취됐지만
+# 폐암(lung large cell carcinoma)이므로 조직 기원은 "lung"으로 분류).
+CELLOSAURUS_TISSUE_ORIGIN: dict[str, dict[str, str]] = {
+    "CVCL_0023": {"cell_name": "A549", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1055": {"cell_name": "A-427", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1285": {"cell_name": "HOP62", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1478": {"cell_name": "NCI-H1573", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1495": {"cell_name": "NCI-H1792", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1517": {"cell_name": "NCI-H2030", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1531": {"cell_name": "NCI-H2122", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1547": {"cell_name": "NCI-H23", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1550": {"cell_name": "NCI-H2347", "tissue_origin": "lung", "disease": "lung adenocarcinoma"},
+    "CVCL_1571": {"cell_name": "NCI-H596", "tissue_origin": "lung", "disease": "lung adenosquamous carcinoma"},
+    "CVCL_0459": {"cell_name": "NCI-H460", "tissue_origin": "lung", "disease": "lung large cell carcinoma"},
+    "CVCL_1577": {"cell_name": "NCI-H661", "tissue_origin": "lung", "disease": "lung large cell carcinoma"},
+    "CVCL_1693": {"cell_name": "SHP-77", "tissue_origin": "lung", "disease": "lung small cell carcinoma"},
+    "CVCL_1716": {"cell_name": "SW 1271", "tissue_origin": "lung", "disease": "lung small cell carcinoma"},
+    "CVCL_1731": {"cell_name": "SW 900", "tissue_origin": "lung", "disease": "lung squamous cell carcinoma"},
+    "CVCL_0028": {"cell_name": "AN3 CA", "tissue_origin": "endometrium", "disease": "endometrial adenocarcinoma"},
+    "CVCL_0069": {"cell_name": "SK-MEL-2", "tissue_origin": "skin", "disease": "melanoma"},
+    "CVCL_0099": {"cell_name": "SNU-1", "tissue_origin": "stomach", "disease": "gastric adenocarcinoma"},
+    "CVCL_0131": {"cell_name": "A-172", "tissue_origin": "brain", "disease": "glioblastoma"},
+    "CVCL_0152": {"cell_name": "AsPC-1", "tissue_origin": "pancreas", "disease": "pancreatic ductal adenocarcinoma"},
+    "CVCL_0179": {"cell_name": "BT-474", "tissue_origin": "breast", "disease": "invasive breast carcinoma"},
+    "CVCL_0218": {"cell_name": "COLO 205", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_0292": {"cell_name": "HCT15", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_0293": {"cell_name": "HEC-1-A", "tissue_origin": "endometrium", "disease": "endometrial adenocarcinoma"},
+    "CVCL_0320": {"cell_name": "HT-29", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_0332": {"cell_name": "HS-578T", "tissue_origin": "breast", "disease": "invasive breast carcinoma"},
+    "CVCL_0334": {"cell_name": "Hs 766T", "tissue_origin": "pancreas", "disease": "pancreatic adenocarcinoma"},
+    "CVCL_0359": {"cell_name": "J82", "tissue_origin": "urinary bladder", "disease": "bladder carcinoma"},
+    "CVCL_0366": {"cell_name": "SNU-423", "tissue_origin": "liver", "disease": "adult hepatocellular carcinoma"},
+    "CVCL_0371": {"cell_name": "KATO III", "tissue_origin": "stomach", "disease": "gastric signet ring cell adenocarcinoma"},
+    "CVCL_0397": {"cell_name": "LS 180", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_0399": {"cell_name": "LoVo", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_0428": {"cell_name": "MIA PaCa-2", "tissue_origin": "pancreas", "disease": "pancreatic undifferentiated carcinoma"},
+    "CVCL_0480": {"cell_name": "PANC-1", "tissue_origin": "pancreas", "disease": "pancreatic ductal adenocarcinoma"},
+    "CVCL_0504": {"cell_name": "RKO", "tissue_origin": "colon", "disease": "colon carcinoma"},
+    "CVCL_0546": {"cell_name": "SW480", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_1056": {"cell_name": "A498", "tissue_origin": "kidney", "disease": "renal cell carcinoma"},
+    "CVCL_1094": {"cell_name": "C-33 A", "tissue_origin": "cervix uteri", "disease": "cervical squamous cell carcinoma"},
+    "CVCL_1097": {"cell_name": "C32", "tissue_origin": "skin", "disease": "amelanotic melanoma"},
+    "CVCL_1098": {"cell_name": "HepG2/C3A", "tissue_origin": "liver", "disease": "hepatoblastoma"},
+    "CVCL_1119": {"cell_name": "CFPAC-1", "tissue_origin": "pancreas", "disease": "pancreatic ductal adenocarcinoma"},
+    "CVCL_1125": {"cell_name": "CHP-212", "tissue_origin": "brain", "disease": "neuroblastoma"},
+    "CVCL_1239": {"cell_name": "H4", "tissue_origin": "brain", "disease": "astrocytoma"},
+    "CVCL_1381": {"cell_name": "LOX-IMVI", "tissue_origin": "skin", "disease": "amelanotic melanoma"},
+    "CVCL_1635": {"cell_name": "Panc 03.27", "tissue_origin": "pancreas", "disease": "pancreatic adenocarcinoma"},
+    "CVCL_1666": {"cell_name": "RPMI-7951", "tissue_origin": "skin", "disease": "melanoma"},
+    "CVCL_1715": {"cell_name": "SW 1088", "tissue_origin": "brain", "disease": "astrocytoma"},
+    "CVCL_1717": {"cell_name": "SW1417", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_1724": {"cell_name": "SW48", "tissue_origin": "colon", "disease": "colon adenocarcinoma"},
+    "CVCL_C466": {"cell_name": "hTERT-HPNE", "tissue_origin": "pancreas", "disease": "normal (hTERT-immortalized)"},
+}
+
 
 def decode(value):
     """h5py에서 나온 bytes/np.bytes_ 값을 str로, numpy 스칼라를 파이썬 타입으로 변환."""
@@ -292,6 +350,13 @@ def extract_tahoe_one(path: Path) -> dict:
                     len(record["obs_sublibrary"]) if record.get("obs_sublibrary") else None
                 )
                 record["pct_pass_filter_full"] = categorical_value_fraction(obs, "pass_filter", "full")
+                record["obs_cell_tissue_origin"] = sorted(
+                    {
+                        CELLOSAURUS_TISSUE_ORIGIN[cid]["tissue_origin"]
+                        for cid in (record.get("obs_cell_line") or [])
+                        if cid in CELLOSAURUS_TISSUE_ORIGIN
+                    }
+                )
             else:
                 for col in TAHOE_CATEGORICAL_OBS_COLUMNS:
                     record[f"obs_{col}"] = None
@@ -300,6 +365,7 @@ def extract_tahoe_one(path: Path) -> dict:
                 record["n_samples"] = None
                 record["n_sublibraries"] = None
                 record["pct_pass_filter_full"] = None
+                record["obs_cell_tissue_origin"] = []
 
             record["encoding_version"] = decode(f.attrs.get("encoding-version"))
     except Exception as exc:  # noqa: BLE001
@@ -308,6 +374,36 @@ def extract_tahoe_one(path: Path) -> dict:
         traceback.print_exc()
 
     return record
+
+
+def build_cell_line_reference(records: list[dict]) -> list[dict]:
+    """Plate 파일들에 등장한 세포주(Cellosaurus ID)들을 모아 조직 기원 정보와 함께
+    세포주 단위 참조 테이블을 만든다.
+
+    Tahoe-100M은 plate마다 50개 세포주가 전부 풀링되어 있어 plate(파일) 단위로
+    조직/질환 필터를 걸어도 대부분의 plate가 그대로 걸린다. 실제로 "폐 관련
+    세포주만 보기" 같은 요청에 쓸모 있으려면 세포주 단위의 별도 테이블이 필요하다.
+    cell_name/tissue_origin/disease는 CELLOSAURUS_TISSUE_ORIGIN(공식 Cellosaurus
+    조회 결과를 정리해둔 고정 테이블)에서 가져온다.
+    """
+    id_to_plates: dict[str, set[int]] = {}
+    for rec in records:
+        for cid in rec.get("obs_cell_line") or []:
+            id_to_plates.setdefault(cid, set()).add(rec.get("plate_num"))
+
+    reference = []
+    for cid in sorted(id_to_plates):
+        info = CELLOSAURUS_TISSUE_ORIGIN.get(cid, {})
+        reference.append(
+            {
+                "cellosaurus_id": cid,
+                "cell_name": info.get("cell_name", cid),
+                "tissue_origin": info.get("tissue_origin"),
+                "disease": info.get("disease"),
+                "n_plates": len(id_to_plates[cid]),
+            }
+        )
+    return reference
 
 
 def extract_tahoe_collection() -> dict:
@@ -341,6 +437,7 @@ def extract_tahoe_collection() -> dict:
         "source_dir": str(TAHOE_DATA_DIR),
         "n_datasets": len(records),
         "datasets": records,
+        "cell_lines": build_cell_line_reference(records),
     }
 
 
