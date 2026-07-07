@@ -1,8 +1,13 @@
-# transciptome_analyzer
+# Transcriptome Analyzer
 
 A tool that reads metadata out of large local single-cell h5ad datasets and
 turns it into a static HTML report you can search, sort, and filter in a
 browser.
+
+> **Current scope:** this repo is currently set up around lung (pulmonary)
+> single-cell datasets — see [Data it covers](#data-it-covers) below. The
+> extraction/reporting pipeline itself isn't lung-specific, so pointing it at
+> other tissues just means adding a new collection.
 
 ## Data it covers
 
