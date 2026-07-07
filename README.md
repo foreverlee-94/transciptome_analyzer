@@ -1,4 +1,4 @@
-# Lung Metadata Explorer
+# transciptome_analyzer
 
 A tool that reads metadata out of large local single-cell h5ad datasets and
 turns it into a static HTML report you can search, sort, and filter in a
